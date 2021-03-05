@@ -12,7 +12,10 @@ class CustomUserManager(BaseUserManager):
         Create and save a User with the given phone number and password.
         """
         if not phone_number:
-            raise ValueError(_('The Phone Nuuumber must be set'))
+            raise ValueError(_('The Phone Number must be set'))
+        for i  in phone_number:
+            if not (i>='0' and i<='9'):
+                raise ValueError(_('Phone Number not valid'))
         user = self.model(phone_number=phone_number, **extra_fields)
         user.set_password(password)
         user.save()

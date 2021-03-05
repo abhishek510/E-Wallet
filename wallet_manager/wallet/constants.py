@@ -1,0 +1,3 @@
+MINIMUM_BALANCE = 100
+DEBIT = 'debit'
+CREDIT = 'credit'

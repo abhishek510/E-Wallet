@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- {% if user.is_authenticated %} -->
+Welcome, {{ user.phone_number }}!
+{% if alert_flag %}
+<script>alert("Transaction Completed!")</script>
+{% endif %}
+{% if min_balance %}
+<script>alert("Transaction cannot be completed as balance will go below minimum limit!")</script>
+{% endif %}
+<br>
+<div>
+    <form action="test" method="POST">
+        {% csrf_token %}
+        <select name="type" id=type>
+            <option value="credit">Credit</option>
+            <option value="debit">Debit</option>
+        </select>
+        Enter Amount <input type="number" name="amount"><br>
+        <input type="submit">
+    </form>
+</div>
+<br>
+
+<p><a href="{% url 'logout' %}">Log Out</a></p>
+<!-- {% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a> |
+  <a href="{% url 'signup' %}">Sign Up</a>
+{% endif %} -->
+{% endblock %}
