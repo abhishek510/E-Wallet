@@ -3,7 +3,7 @@ from users.models import WalletUser
 # Create your models here.
 
 class Balance(models.Model):
-    user = models.ForeignKey(WalletUser, on_delete = models.CASCADE, unique = True)
+    user = models.OneToOneField(WalletUser, on_delete = models.CASCADE)
     amount = models.DecimalField(max_digits = 10, decimal_places =2)
 
 class TransactionHistory(models.Model):
