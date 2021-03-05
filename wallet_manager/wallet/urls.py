@@ -5,6 +5,7 @@ from .views import *
 
 urlpatterns = [
     path('index', index, name = 'index'),
-    path('modfiy', modifybalance, name = 'modifybalance'),
-    path('test', test, name = 'test'),
+    path('modify', test, name = 'test'),
+    path('show_balance', show_balance, name = 'show_balance'),
+    path('transaction_history', transaction_history, name = 'transaction_history'),
     ]

@@ -11,7 +11,7 @@ from decimal import Decimal
 def index(request):
     return render(request, 'index.html')
 
-    
+
 def test(request):
     if request.method == "POST":
         transaction_type = request.POST.get("type")
@@ -38,3 +38,19 @@ def test(request):
 
         return render(request, 'index.html', {'alert_flag': True})
     
+
+def show_balance(request):
+    wallet_owner = request.user
+    check_balance = Balance.objects.filter(user = wallet_owner)
+    if len(check_balance) == 0:
+        balance_initial = Balance(user = wallet_owner, amount = constants.MINIMUM_BALANCE)
+        balance_initial.save()
+
+    check_balance = Balance.objects.get(user = wallet_owner).amount
+    return HttpResponse(f'Balance is {check_balance}', content_type='text/plain')
+
+
+def transaction_history(request):
+    wallet_owner = request.user
+    transaction_history = TransactionHistory.objects.filter(user = wallet_owner)
+    return render(request, 'transactions.html', {"list":transaction_history})

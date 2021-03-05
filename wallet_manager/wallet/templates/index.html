@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- {% if user.is_authenticated %} -->
 Welcome, {{ user.phone_number }}!
 {% if alert_flag %}
 <script>alert("Transaction Completed!")</script>
@@ -11,22 +10,32 @@ Welcome, {{ user.phone_number }}!
 {% endif %}
 <br>
 <div>
-    <form action="test" method="POST">
+    <form action="modify" method="POST">
         {% csrf_token %}
+        <label for="type">Choose a transaction type:</label>
         <select name="type" id=type>
             <option value="credit">Credit</option>
             <option value="debit">Debit</option>
         </select>
+        <br>
         Enter Amount <input type="number" name="amount"><br>
         <input type="submit">
     </form>
 </div>
 <br>
+<hr>
+
+<div>
+    <form action='show_balance' method='GET'>
+        <button type='submit'>Check Balance</button>
+    </form>
+</div>
+<br>
+<div>
+    <form action='transaction_history' method='GET'>
+        <button type='submit'>Check Transaction History</button>
+    </form>
+</div>
 
 <p><a href="{% url 'logout' %}">Log Out</a></p>
-<!-- {% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a> |
-  <a href="{% url 'signup' %}">Sign Up</a>
-{% endif %} -->
 {% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+Transactions for {{ user.phone_number }}
+<table>
+    <tr>
+        <th>Amount</th>
+        <th>Time</th>
+    </tr>
+    {% for transaction in list %}
+    <tr>
+        <td>{{transaction.amount}}</td>
+        <td>{{transaction.created_at}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'index' %}">Go Back</a>
+{% endblock %}
